@@ -1,6 +1,6 @@
 <?php
 
-namespace Text\Util;
+namespace B1rdex\Text\Util;
 
 use Collator;
 

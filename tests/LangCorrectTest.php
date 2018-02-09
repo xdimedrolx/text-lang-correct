@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Text\Tests;
+namespace B1rdex\Text\Tests;
 
+use B1rdex\Text\LangCorrect;
 use PHPUnit\Framework\TestCase;
-use Text\LangCorrect;
 
 /**
- * @covers \Text\LangCorrect
+ * @covers \B1rdex\Text\LangCorrect
  */
 class LangCorrectTest extends TestCase
 {

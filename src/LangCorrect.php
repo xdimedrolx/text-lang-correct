@@ -1,9 +1,9 @@
 <?php
 
-namespace Text;
+namespace B1rdex\Text;
 
-use Text\Util\ReflectionTypeHint;
-use Text\Util\UTF8;
+use B1rdex\Text\Util\ReflectionTypeHint;
+use B1rdex\Text\Util\UTF8;
 
 /**
  * Automatic correction of the language for words in the text because of the wrong keyboard layout

@@ -1,15 +1,15 @@
 {
-    "name": "b1rdex/php-lang-correct",
+    "name": "b1rdex/text-lang-correct",
     "license": "MIT",
     "require": {},
     "autoload": {
         "psr-4": {
-            "Text\\": "src/"
+            "B1rdex\\Text\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Text\\Tests\\": "tests"
+            "B1rdex\\Text\\Tests\\": "tests"
         }
     },
     "require-dev": {
