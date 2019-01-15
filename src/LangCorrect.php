@@ -2795,6 +2795,7 @@ class LangCorrect
 
     /**
      * @param  array|null $words_exceptions
+     *
      * @throws \LogicException
      */
     public function __construct(array $words_exceptions = null)
@@ -2834,8 +2835,8 @@ class LangCorrect
     /**
      * Исправляет клавиатурные опечатки в тексте.
      *
-     * @param   string $s         Текст в кодировке UTF-8.
-     * @param   int         $mode      Константы self::SIMILAR_CHARS и/или self::KEYBOARD_LAYOUT,
+     * @param   string       $s        Текст в кодировке UTF-8.
+     * @param   int          $mode     Константы self::SIMILAR_CHARS и/или self::KEYBOARD_LAYOUT,
      *                                 (их можно комбинировать). Описание констант см. выше.
      *                                 При использовании self::KEYBOARD_LAYOUT время работы увеличивается примерно в 10 раз.
      * @param   array       &$words    Ассоц. массив со словами, которые были исправлены:
@@ -2919,7 +2920,7 @@ class LangCorrect
         #var_export($a);
 
         // todo: add skip list
-        if ($word === 'бэкаут') {
+        if ($word === 'блэкаут') {
             return $word;
         }
 
