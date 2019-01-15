@@ -36,4 +36,15 @@ class LangCorrectTest extends TestCase
             [';tycrbq h.rpfr', 'женский рюкзак'],
         ];
     }
+
+    /**
+     * @test
+     */
+    public function it_should_skip_some(): void
+    {
+        $sut = new LangCorrect();
+        $result = $sut->parse('блэкаут', LangCorrect::KEYBOARD_LAYOUT);
+
+        self::assertEquals('блэкаут', $result);
+    }
 }

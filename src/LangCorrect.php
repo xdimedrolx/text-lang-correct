@@ -2918,6 +2918,11 @@ class LangCorrect
         $word = $a[0];
         #var_export($a);
 
+        // todo: add skip list
+        if ($word === 'бэкаут') {
+            return $word;
+        }
+
         $suggestions = [];
 
         #если найдено слово из мешанины русских и латинских букв
