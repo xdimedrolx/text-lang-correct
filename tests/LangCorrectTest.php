@@ -28,7 +28,7 @@ class LangCorrectTest extends TestCase
         self::assertEquals($expected, $result);
     }
 
-    public function replaces()
+    public function replaces(): array
     {
         return [
             ['ghbdtn', 'привет'],

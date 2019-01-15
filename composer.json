@@ -1,7 +1,9 @@
 {
     "name": "b1rdex/text-lang-correct",
     "license": "MIT",
-    "require": {},
+    "require": {
+        "php": "^7.1||^7.2"
+    },
     "autoload": {
         "psr-4": {
             "B1rdex\\Text\\": "src/"

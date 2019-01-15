@@ -4,6 +4,7 @@ namespace B1rdex\Text;
 
 use B1rdex\Text\Util\ReflectionTypeHint;
 use B1rdex\Text\Util\UTF8;
+use LogicException;
 
 /**
  * Automatic correction of the language for words in the text because of the wrong keyboard layout
@@ -2793,13 +2794,13 @@ class LangCorrect
     ];
 
     /**
-     *
      * @param  array|null $words_exceptions
+     * @throws \LogicException
      */
     public function __construct(array $words_exceptions = null)
     {
         if (!ReflectionTypeHint::isValid()) {
-            return false;
+            throw new LogicException('ReflectionTypeHint::isValid() check failed');
         }
         #русский --> английский:
         $this->en_correct = '/(?: (?:' . $this->tt_f . ')
@@ -2888,9 +2889,6 @@ class LangCorrect
         #исправляем русские буквы (похожие на латинские) с рядом стоящими цифрами на латинские
         #например, это м. б. каталожные номера автозапчастей, в которых есть русские буквы: 1500A023, 52511-60900-H0, K2305, XA527672
         #корректно обрабатываем вхождения '1-ое', 'Ту-134', 'А19-3107/06-43-Ф02-4227/06-С1'
-        if (version_compare(PHP_VERSION, '5.2.0', '<')) {
-            return $s;
-        }
         return preg_replace_callback('~(?: (?<=[^-_/]|^)
                                            (?:' . $this->ru_similar . ')++
                                            (?= (?:' . $this->en . '|[-_/])*+ (?<=[^-_/]|' . $this->en . '[-_/])
