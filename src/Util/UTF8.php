@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection UnqualifiedReferenceInspection */
 
 namespace B1rdex\Text\Util;
 
@@ -2772,9 +2772,9 @@ class UTF8
                             trigger_error('Unknown block "' . $block . '"!', E_USER_WARNING);
                             return false;
                         }
-                        list ($min, $max) = self::$unicode_blocks[$block];
+                        [$min, $max] = self::$unicode_blocks[$block];
                     } elseif (is_array($block)) {
-                        list ($min, $max) = $block;
+                        [$min, $max] = $block;
                     } elseif (is_int($block)) {
                         $min = $max = $block;
                     } else {
@@ -3084,17 +3084,17 @@ class UTF8
             case 1 :
                 return $cache[$char] = ord($char);
             case 2 :
-                return $cache[$char] = (ord($char{1}) & 63) |
-                    ((ord($char{0}) & 31) << 6);
+                return $cache[$char] = (ord($char[1]) & 63) |
+                    ((ord($char[0]) & 31) << 6);
             case 3 :
-                return $cache[$char] = (ord($char{2}) & 63) |
-                    ((ord($char{1}) & 63) << 6) |
-                    ((ord($char{0}) & 15) << 12);
+                return $cache[$char] = (ord($char[2]) & 63) |
+                    ((ord($char[1]) & 63) << 6) |
+                    ((ord($char[0]) & 15) << 12);
             case 4 :
-                return $cache[$char] = (ord($char{3}) & 63) |
-                    ((ord($char{2}) & 63) << 6) |
-                    ((ord($char{1}) & 63) << 12) |
-                    ((ord($char{0}) & 7) << 18);
+                return $cache[$char] = (ord($char[3]) & 63) |
+                    ((ord($char[2]) & 63) << 6) |
+                    ((ord($char[1]) & 63) << 12) |
+                    ((ord($char[0]) & 7) << 18);
             default :
                 trigger_error('Character 0x' . bin2hex($char) . ' is not UTF-8!', E_USER_WARNING);
                 return false;
