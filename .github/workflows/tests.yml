@@ -24,7 +24,7 @@ jobs:
           tools: composer:v2
           coverage: none
 
-      - name: Setup Problem Matchers
+      - name: Setup Problem Matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install Dependencies
@@ -32,7 +32,10 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 5
-          command: composer update --no-interaction --no-progress
+          command: composer install --no-interaction --no-progress
+
+      - name: Execute PHPStan
+        run: vendor/bin/phpstan analyse
 
       - name: Execute PHPUnit
         run: vendor/bin/phpunit
