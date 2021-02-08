@@ -47,4 +47,12 @@ class LangCorrectTest extends TestCase
 
         self::assertEquals('блэкаут', $result);
     }
+
+    public function testSimpleFixer(): void
+    {
+        $sut = new LangCorrect();
+        $result = $sut->parse('ghbdtn', LangCorrect::SIMILAR_CHARS);
+
+        self::assertEquals('привет', $result);
+    }
 }
