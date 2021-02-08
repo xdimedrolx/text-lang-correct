@@ -55,4 +55,13 @@ class LangCorrectTest extends TestCase
 
         self::assertEquals('тесто', $result);
     }
+
+    public function testRefs(): void
+    {
+        $sut = new LangCorrect();
+        $phrase = 'Торшер напольный телескопический "Эко-стиль" Е27 60W чёрный гибкие рожки 177х22х22 см';
+        $result = $sut->parse($phrase, LangCorrect::KEYBOARD_LAYOUT);
+
+        self::assertNotFalse($result);
+    }
 }

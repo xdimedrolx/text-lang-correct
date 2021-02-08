@@ -2895,9 +2895,9 @@ class LangCorrect
                                       ~sxSX', [$this, '_entry'], $s);
     }
 
-    private function _entry(array &$a)
+    private function _entry(array $a)
     {
-        $entry =& $a[0];
+        $entry = $a[0];
         $s = strtr($entry, $this->table[0]);
         if ($s !== $entry) {
             $this->words[$entry] = $s;
@@ -3055,7 +3055,7 @@ class LangCorrect
     private function _replace($word, $regexp)
     {
         do {
-            $word = preg_replace_callback($regexp, [&$this, '_strtr'], $w = $word);
+            $word = preg_replace_callback($regexp, [$this, '_strtr'], $w = $word);
         } while ($w !== $word);
         return $word;
     }
@@ -3164,7 +3164,7 @@ class LangCorrect
 
     private function _strtr(array $a)
     {
-        $word =& $a[0];
+        $word = $a[0];
         return strtr($word, $this->is_flip ? $this->table_flip[$this->method] : $this->table[$this->method]);
     }
 }
