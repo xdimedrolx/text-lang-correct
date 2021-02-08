@@ -5,6 +5,7 @@ namespace B1rdex\Text;
 use B1rdex\Text\Util\ReflectionTypeHint;
 use B1rdex\Text\Util\UTF8;
 use LogicException;
+use function mb_strlen;
 
 /**
  * Automatic correction of the language for words in the text because of the wrong keyboard layout
@@ -2798,11 +2799,8 @@ class LangCorrect
      *
      * @throws \LogicException
      */
-    public function __construct(array $words_exceptions = null)
+    public function __construct(?array $words_exceptions = null)
     {
-        if (!ReflectionTypeHint::isValid()) {
-            throw new LogicException('ReflectionTypeHint::isValid() check failed');
-        }
         #русский --> английский:
         $this->en_correct = '/(?: (?:' . $this->tt_f . ')
                                    (?: (?:' . $this->en_uniq . ') | (?:' . $this->en_sc . '){2} )
@@ -2839,20 +2837,13 @@ class LangCorrect
      * @param   int          $mode     Константы self::SIMILAR_CHARS и/или self::KEYBOARD_LAYOUT,
      *                                 (их можно комбинировать). Описание констант см. выше.
      *                                 При использовании self::KEYBOARD_LAYOUT время работы увеличивается примерно в 10 раз.
-     * @param   array       &$words    Ассоц. массив со словами, которые были исправлены:
+     * @param   array<string, string>        $words    Ассоц. массив со словами, которые были исправлены:
      *                                 в ключах оригиналы, в значениях исправленные слова.
      *
      * @return  string|bool            Returns FALSE if error occured
      */
-    public function parse($s, $mode = self::SIMILAR_CHARS, array &$words = null)
+    public function parse(string $s, int $mode = self::SIMILAR_CHARS, array &$words = null)
     {
-        if (!ReflectionTypeHint::isValid()) {
-            return false;
-        }
-        if (!is_string($s)) {
-            return $s;
-        }
-
         if ($mode < self::SIMILAR_CHARS || $mode > (self::SIMILAR_CHARS | self::KEYBOARD_LAYOUT | self::ADD_FIX)) {
             trigger_error('Unknown mode', E_USER_WARNING);
             return false;
@@ -3077,11 +3068,11 @@ class LangCorrect
 
     private function _detect($word, array $suggestions, $is_sc)
     {
-        if (0) #DEBUG
-        {
-            //$suggestions['?'] = $word;
-            var_export($suggestions);
-        }
+        // if (0) #DEBUG
+        // {
+        //     //$suggestions['?'] = $word;
+        //     var_export($suggestions);
+        // }
         #не д. б. несуществующих N-грамм
         foreach ($suggestions as $type => $w) {
             $lang = substr($type, 0, 2);
@@ -3089,11 +3080,11 @@ class LangCorrect
                 unset($suggestions[$type]);
             }
         }
-        if (0) #DEBUG
-        {
-            //$suggestions['?'] = $word;
-            var_export($suggestions);
-        }
+        // if (0) #DEBUG
+        // {
+        //     //$suggestions['?'] = $word;
+        //     var_export($suggestions);
+        // }
         if (count($suggestions) === 0) {
             return $word;
         }
@@ -3108,7 +3099,7 @@ class LangCorrect
         #если в $s спецсимволов больше чем букв, возвращаем $word
         $sc_count = 0;
         $s = preg_replace('/' . $this->sc . '/sSX', '', $s, -1, $sc_count);
-        if ($sc_count > 0 && $sc_count > UTF8::strlen($s)) {
+        if ($sc_count > 0 && $sc_count > mb_strlen($s, 'utf-8')) {
             return $word;
         }
 
@@ -3119,7 +3110,7 @@ class LangCorrect
 
     private function _bigram_exists($word, $lang)
     {
-        $word = ($lang === 'en') ? strtolower($word) : UTF8::lowercase($word);
+        $word = ($lang === 'en') ? strtolower($word) : mb_strtolower($word, 'utf-8');
 
         #шаг 0.
         #проверяем слова в списке слов-исключений
@@ -3148,7 +3139,7 @@ class LangCorrect
         }
 
         #шаг 3.
-        $length = UTF8::strlen($word);
+        $length = mb_strlen($word, 'utf-8');
         for ($pos = 0, $limit = $length - 1; $pos < $limit; $pos++) {
             /*
             TODO  Качество проверки по несуществующим биграммам можно немного повысить,

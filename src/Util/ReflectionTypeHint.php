@@ -69,7 +69,13 @@ class ReflectionTypeHint
             return true;
         }
         $bt = self::debugBacktrace(null, 1);
+        $file = $line = $function = $class = $object = $type = $args = null;
         extract($bt);  //to $file, $line, $function, $class, $object, $type, $args
+        /**
+         * @var null|array $args
+         * @var string $class
+         * @var string $function
+         */
         if (!$args) {
             return true;
         } #speed improve
