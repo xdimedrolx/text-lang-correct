@@ -34,6 +34,11 @@ class LangCorrectTest extends TestCase
             ['ghbdtn', 'привет'],
             ['руддщ', 'hello'],
             [';tycrbq h.rpfr', 'женский рюкзак'],
+            ['cevrf', 'сумка'],
+            ['cevrb', 'сумки'],
+            ['orb', 'orb'],
+            ['zorb', 'zorb'],
+            ['surf', 'surf'],
         ];
     }
 

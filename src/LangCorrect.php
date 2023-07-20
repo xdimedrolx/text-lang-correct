@@ -2658,6 +2658,8 @@ class LangCorrect
         'qz ' => 0,
         'rq ' => 0,
         'rz ' => 0,
+        'rf ' => 0,
+        'rb ' => 0,
         'sg ' => 0,
         'sj ' => 0,
         'sx' => 0,
