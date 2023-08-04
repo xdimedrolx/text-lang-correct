@@ -2666,6 +2666,7 @@ class LangCorrect
         'sx ' => 0,
         'sz' => 0,
         'sz ' => 0,
+        'tc ' => 0,
         'tg ' => 0,
         'tj ' => 0,
         'tq' => 0,

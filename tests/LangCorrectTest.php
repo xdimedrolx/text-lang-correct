@@ -39,6 +39,8 @@ class LangCorrectTest extends TestCase
             ['orb', 'orb'],
             ['zorb', 'zorb'],
             ['surf', 'surf'],
+            ['uthrektc', 'геркулес'],
+            ['etc', 'etc'],
         ];
     }
 
