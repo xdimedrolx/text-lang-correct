@@ -65,8 +65,8 @@ class ReflectionTypeHint
 
     public static function isValid()
     {
-        if (!assert_options(ASSERT_ACTIVE)) {
-            return true;
+        if (!filter_var(ini_get('assert.active'), FILTER_VALIDATE_BOOLEAN)) {
+	    return true;
         }
         $bt = self::debugBacktrace(null, 1);
         $file = $line = $function = $class = $object = $type = $args = null;
